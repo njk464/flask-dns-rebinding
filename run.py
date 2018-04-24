@@ -3,16 +3,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+	return render_template("index.html")
+
+@app.route('/vuln1')
+def vuln1():
 	attack_file = open("attack.bak", "r")
 	attack_content = attack_file.read()
-	return render_template("index.html", attack = attack_content)
+	return render_template("vuln1.html", attack = attack_content)
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-  # if request.method == 'POST':
-  #   # check if the post request has the file part
-  #   print request.files['file'].read()
-  return ""
+@app.route('/vuln2')
+def vuln2():
+	return render_template("vuln2.html")
 
 if __name__ == '__main__':
 	app.run(host="0.0.0.0")
